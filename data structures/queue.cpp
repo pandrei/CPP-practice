@@ -26,26 +26,20 @@ queue::queue() {
 }
 
 int queue::push(int val) {
-	if (head == NULL) {
-		head = new node;
-		head->val = val;
-		head->left = NULL;
-		head->right = NULL;
-	} else 
-
-	if (tail == NULL) {
-		tail = new node;
-		tail->val = val;
-		tail->left = head;
-		head->right = tail;
-		tail->right = NULL;
-	} else 
-	if( head != NULL && tail != NULL) {
+	if (head != NULL) {
 		node* tmp = new node;
 		tmp->val = val;
 		tmp->left = NULL;
 		tmp->right = head;
+		head->left = tmp;
 		head = tmp;
+	}
+	else {
+		head = new node;
+		head->val = val;
+		head->left = NULL;
+		head->right = NULL;
+		tail = head;
 	}
 	return 0;
 }
@@ -96,12 +90,11 @@ int main() {
 	queue q;
 	for (int i = 0; i < 10; i++) {
 		q.push(i);
-	//	cout << q.back() << " " << q.front() << endl;
 	}
-	//q.test_queue();
+	q.test_queue();
 	cout << endl;
 	for (int i = 0; i < 10; i++) {
-		cout << q.front();
+		cout << q.back();
 		q.pop();
 	}
 	getchar();
